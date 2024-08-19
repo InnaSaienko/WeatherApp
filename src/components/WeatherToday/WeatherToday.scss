@@ -1,0 +1,21 @@
+@import "../../assets/styles/_variables";
+@import "../../assets/styles/_mixins";
+
+.weather-today {
+  position: relative;
+  @include flex(center, center, column);
+  height: 35%;
+  width: 80%;
+  
+  & .weather-info {
+    @include flex(space-between, center);
+    width: 100%;
+
+    & .weather-more {
+        width: 30%;
+    }
+    & .text {
+        margin: 1%;
+    }
+  }
+}
