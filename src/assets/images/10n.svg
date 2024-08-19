@@ -1,0 +1,67 @@
+<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="64px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" version="1.1" viewBox="0 0 64 64" width="64px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>
+   <style type="text/css">
+      .fil1 {fill:#0E6096; stroke: #9DAAB4; stroke-width: 2px;}
+     .fil2 {fill:#3A4C63; stroke: #9DAAB4; stroke-width: 2px;}
+     .fil0 {fill:#0E6096; fill-rule:nonzero}
+   </style>
+     </defs>
+   <g id="Layer_x0020_1">
+   <g id="_740098240">
+     <!-- Lines (Raindrops) -->
+     <path id="drop1" class="fil0" d="M22.3 46.27c0.24,-0.64 0.96,-0.96 1.6,-0.72 0.65,0.24 0.97,0.96 0.73,1.6l-1.52 4.05c-0.24,0.64 -0.96,0.97 -1.61,0.72 -0.64,-0.24 -0.97,-0.96 -0.73,-1.6l1.53 -4.05zm9.91 ">
+       <animate
+             attributeName="cy"
+             values="51.1; 60; 60; 51.1" 
+             dur="1.5s" 
+             begin="0s" 
+             repeatCount="indefinite"/>
+         <animate
+             attributeName="opacity"
+             values="1; 1; 0;0; 0"
+             dur="1.5s"
+             begin="0s"
+             repeatCount="indefinite"/>
+     </path>
+ 
+   <path id="drop2" class="fil0" d="M32.21 46.27c0.24,-0.64 0.96,-0.97 1.6,-0.73 0.64,0.24 0.97,0.96 0.73,1.6l-2.79 7.52c-0.24,0.64 -0.96,0.97 -1.6,0.73 -0.65,-0.24 -0.97,-0.96 -0.73,-1.6l2.79 -7.52zm8.64">
+     <animate
+             attributeName="cy"
+             values="51.1; 60; 60; 51.1" 
+             dur="1.5s" 
+             begin="0.5s" 
+             repeatCount="indefinite"/>
+         <animate
+             attributeName="opacity"
+             values="1; 1; 0;0; 0"
+             dur="1.5s"
+             begin="0.5s"
+             repeatCount="indefinite"/>
+     </path>
+ 
+   <path id="drop3" class="fil0" d="M42.11 46.27c0.24,-0.64 0.96,-0.96 1.61,-0.72 0.64,0.24 0.96,0.96 0.72,1.6l-1.52 4.05c-0.24,0.64 -0.96,0.97 -1.61,0.72 -0.64,-0.24 -0.97,-0.96 -0.72,-1.6l1.52 -4.05z">
+     <animate
+             attributeName="cy"
+             values="51.1; 60; 60; 51.1" 
+             dur="1.5s" 
+             begin="1s" 
+             repeatCount="indefinite"/>
+         <animate
+             attributeName="opacity"
+             values="1; 1; 0;0; 0"
+             dur="1.5s"
+             begin="1s"
+             repeatCount="indefinite"/>
+     </path>
+ 
+     <!-- Small Dark Cloud -->
+       <g id="smallCloud">
+         <path class="fil1" d="M8.75 35.28c-3.41,0 -6.15,-2.76 -6.15,-6.15 0,-3.37 2.7,-6.09 6.05,-6.15 0.41,-6 5.4,-10.74 11.49,-10.74 4.92,0 9.12,3.09 10.77,7.45 0.47,-0.09 0.93,-0.12 1.42,-0.12 4.01,0 7.3,2.98 7.8,6.84 2.46,0 4.44,1.97 4.44,4.44 0,2.43 -1.92,4.4 -4.32,4.44 -10.5,0.15 -20.99,0.01 -31.49,0.01z"/>
+       </g>
+     <!-- Big Light Cloud -->
+     <path class="fil2" d="M12.29 43.71l-0.1 0c-3.85,0 -6.97,-3.11 -6.97,-6.96 0,-3.81 3.05,-6.9 6.85,-6.97 0.45,-6.8 6.1,-12.17 13.02,-12.17 5.58,0 10.34,3.5 12.2,8.43 0.52,-0.1 1.06,-0.14 1.61,-0.14 4.52,0 8.27,3.38 8.83,7.75 2.78,0 5.03,2.26 5.03,5.03 0,2.74 -2.19,4.97 -4.91,5.03l-0.12 0 -0.07 0 -8.67 0 -0.09 0 -0.12 0 -13.56 0 -0.13 0 -0.14 0 -12.66 0z"
+ />
+     </g>
+       
+     </g>
+       
+     </svg>
