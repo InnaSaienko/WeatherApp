@@ -1,0 +1,8 @@
+@import 'variables';
+@import 'mixins';
+
+.App-header {
+    @include flex(center, center, column);
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
