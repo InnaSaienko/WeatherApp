@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+ сонце вдень #FFC106
+
+Світло-сірий: #C0C0C0
+Сріблястий: #D3D3D3
+Білий з легким сірим відтінком: #E0E0E0
+Button =>
+ButtonClick = () => {
+  this.setState((prevState) => ({
+    includeExtendDays: !prevState.includeExtendDays,
+  }))
+};
+
