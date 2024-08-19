@@ -1,0 +1,86 @@
+@import "./assets/styles/main";
+@import "./assets/styles/_variables";
+@import "./assets/styles/_mixins";
+
+* {
+  box-sizing: border-box;
+}
+.App {
+  background: $color-main;
+  height: 100vh;
+  @include flex(center, center, column);
+  font-size: calc(10px + 2vmin);
+  color: $color-white;
+
+  @media screen and (max-width: 992px) {
+    font-size: calc(8px + 2vmin);
+    }
+  & .title {
+    margin: 0 auto;
+    font: $font-title;
+    
+    @media screen and (max-width: 992px) {
+      font-size: 6vmin;
+      }
+  }
+
+  & .weather-main {
+    @include flex(flex-start, center, column);
+    width: 80%;
+    height: 80%;
+    background: $color-blue;
+    border: 5px solid $color-blue-light;
+    border-radius: 2vmax;
+    color: $color-white;
+
+    & .menu-item {
+      display: flex;
+      gap: 6vw;
+      margin: 0;
+
+      & .list-item {
+        list-style: none;
+      }
+    }
+
+    .btn-round {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border: 1px solid $color-white;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      display: block;
+    
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 10px;
+        background-color: $color-white;
+        top: 42%;
+        left: 59%;
+        transform: translateX(-50%) rotate(45deg);
+        transition: transform 0.3s ease;
+      }
+    
+      &::after {
+        left: 42%;
+        transform: translateX(-50%) rotate(-45deg);
+      }
+    
+      &.active {
+        &::before {
+          transform: translateX(-50%) rotate(-45deg);
+        }
+    
+        &::after {
+          transform: translateX(-50%) rotate(45deg);
+        }
+      }
+    }
+    
+  }
+}
