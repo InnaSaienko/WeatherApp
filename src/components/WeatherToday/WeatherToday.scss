@@ -16,6 +16,11 @@
     }
     & .text {
         margin: 1%;
+        & span {
+          @media screen and (max-width: 992px) {
+            display: block;
+          }
+        }
     }
   }
 }

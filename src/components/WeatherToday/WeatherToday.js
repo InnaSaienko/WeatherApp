@@ -30,15 +30,16 @@ class WeatherToday extends React.Component {
           <p className="text">{tempC}°C</p>
           <div className="weather-more">
             <p className="text">
-              Wind: {this.props.todayWeather.wind.speed} kmph
+              Wind: <span>{this.props.todayWeather.wind.speed} kmph</span>
             </p>
-            <p className="text">Precip: {this.props.todayWeather.pop} %</p>
             <p className="text">
-              Pressure: {this.props.todayWeather.main.pressure}mb
+              Precip: <span>{this.props.todayWeather.pop} %</span>
+            </p>
+            <p className="text">
+              Pressure: <span>{this.props.todayWeather.main.pressure}mb</span>
             </p>
           </div>
         </div>
-        {/* <button className="btn-round"></button> */}
       </div>
     );
   }
