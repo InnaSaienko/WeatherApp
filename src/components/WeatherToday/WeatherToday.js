@@ -7,6 +7,7 @@ countries.registerLocale(enLocale);
 
 class WeatherToday extends React.Component {
   render() {
+    console.log("props for today:")
     const tempC = Math.round(this.props.todayWeather.main.temp - 273, 15);
     const weather = this.props.todayWeather.weather[0].main;
     const iconId = this.props.todayWeather.weather[0].icon;
