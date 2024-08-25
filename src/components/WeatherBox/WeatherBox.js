@@ -1,10 +1,7 @@
 import React from "react";
 import "./WeatherBox.scss";
 
-class WeatherBox extends React.Component {
-  getDayOfWeek = (date) => {
-    const daysOfWeek = [
-      // TODO: extract class prop or global
+const daysOfWeek = [
       "Sunday",
       "Monday",
       "Tuesday",
@@ -13,6 +10,9 @@ class WeatherBox extends React.Component {
       "Friday",
       "Saturday",
     ];
+
+class WeatherBox extends React.Component {
+  getDayOfWeek = (date) => {
     return daysOfWeek[date.getDay()].slice(0, 3).toUpperCase();
   };
 
