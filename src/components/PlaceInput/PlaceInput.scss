@@ -1,5 +1,4 @@
-@import '../../assets/styles/_variables';
-
+@import "../../assets/styles/_variables";
 
 .loading {
   background-color: $color-white;
@@ -12,7 +11,6 @@
 .input {
   display: inline-block;
   margin-top: 3%;
-  width: 60%;  
   padding: 10px 0px 10px 30px;
   line-height: 120%;
   border-radius: 20px;
@@ -31,3 +29,28 @@
     font-size: 16px;
   }
 }
+
+.pac {
+  &-container {
+    border: 1px solid $color-blue-light;
+    border-radius: 2vmin;
+
+    &::after {
+      display: none;
+    }
+  }
+  &-icon {
+    display: none;
+  }
+
+  &-item-query {
+  font: $font-main;
+  color: $color-main;
+
+  & span {
+    color: $color-main;
+  }
+}
+}
+
+// La Ciotat
