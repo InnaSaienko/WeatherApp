@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.scss";
-import CityInput from "./components/CityInput/CityInput";
+import PlaceInput from "./components/PlaceInput/PlaceInput";
 import WeatherToday from "./components/WeatherToday/WeatherToday";
 import Button from "./components/Button/Button";
 import WeatherBox from "./components/WeatherBox/WeatherBox";
 
 class App extends React.Component {
   state = {
-    city: undefined,
+    city: "",
     dates: new Array(1),
     includeExtendDays: false,
   };
@@ -27,9 +27,12 @@ class App extends React.Component {
     });
   };
 
-  makeApiCall = async (city) => {
+  makeApiCall = async (address) => {
+    const queryAddress = [address.city, address.countryCode].filter(item => item !== null).join(",");
+    console.log("newAddress: ", queryAddress);
+
     const api_data = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=92ac86e49bd033dac4bf08195ba344d1`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=92ac86e49bd033dac4bf08195ba344d1`
     ).then((response) => response.json());
 
     if (api_data.cod === "200") {
@@ -49,8 +52,8 @@ class App extends React.Component {
 
   render() {
     const WeatherBoxes = () => {
-      const boxLi = this.state.dates.slice(1, 5).map((day) => (
-        <li className="list-item">
+      const boxLi = this.state.dates.slice(1, 5).map((day, index) => (
+        <li key={index} className="list-item">
           <WeatherBox {...day} />
         </li>
       ));
@@ -68,7 +71,10 @@ class App extends React.Component {
             todayWeather={this.state.dates[0]}
           />
           {this.state.includeExtendDays && <WeatherBoxes />}
-          <Button onClick={this.ButtonClick.bind(this)} isEnabled={this.state.includeExtendDays}/>
+          <Button
+            onClick={this.ButtonClick.bind(this)}
+            isEnabled={this.state.includeExtendDays}
+          />
         </>
       );
     };
@@ -77,9 +83,9 @@ class App extends React.Component {
       <div className="App">
         <h1 className="title">Weather Forecast</h1>
         <div className="weather-main">
-          <CityInput
+          <PlaceInput
             city={this.state.city}
-            makeApiCall={this.makeApiCall.bind(this)}
+            onPlaceSelected={this.makeApiCall}
           />
           <DisplayWeatherInfo city={this.state.city} />
         </div>
