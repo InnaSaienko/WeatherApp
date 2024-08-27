@@ -22,8 +22,7 @@ class WeatherToday extends React.Component {
             />
             <p>{weather}</p>
           </div>
-          <h2 className="title-2"></h2>
-          <p className="text">{tempC}°C</p>
+          <h2 className="title-2">{tempC}°C</h2>
           <div className="weather-more">
             <p className="text">
               Wind: <span>{this.props.todayWeather.wind.speed} kmph</span>
