@@ -1,10 +1,8 @@
 import React from "react";
 import "./App.scss";
 import PlaceInput from "./components/PlaceInput/PlaceInput";
-import WeatherToday from "./components/WeatherToday/WeatherToday";
+import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 import { Preloader } from "./components/Preloader/Preloader";
-import Button from "./components/Button/Button";
-import WeatherBox from "./components/WeatherBox/WeatherBox";
 
 class App extends React.Component {
   state = {
@@ -14,7 +12,6 @@ class App extends React.Component {
       countryName: "Iceland",
     },
     dates: null,
-    includeExtendDays: false,
   };
 
   setWeatherData = (data) => {
@@ -54,54 +51,19 @@ class App extends React.Component {
     }, this.getWeatherData(this.state.address));
   };
   
-  ButtonClick = () => {
-    this.setState((prevState) => {
-      return {
-        includeExtendDays: !prevState.includeExtendDays,
-      };
-    });
-  };
-
   render() {
-    const WeatherBoxes = () => {
-      const boxLi = this.state.dates.slice(1, 5).map((day, index) => (
-        <li key={index} className="list-item">
-          <WeatherBox {...day} />
-        </li>
-      ));
-
-      return <ul className="menu-item">{boxLi}</ul>;
-    };
-
-    const DisplayWeatherInfo = ({ address }) => {
-      if (!address) return null;
-
-      return (
-        <>
-          <WeatherToday
-            cityName={this.state.address.city}
-            countryName={this.state.address.countryName}
-            todayWeather={this.state.dates[0]}
-          />
-          {this.state.includeExtendDays && <WeatherBoxes />}
-          <Button
-            onClick={this.ButtonClick.bind(this)}
-            isEnabled={this.state.includeExtendDays}
-          />
-        </>
-      );
-    };
-
     return (
       <div className="App">
         <h1 className="title">Weather Forecast</h1>
         <div className="weather-main">
           <PlaceInput
-            // city={this.state.address.city}
             onPlaceSelected={this.handlePlaceChange}
           />
           {this.state.dates && this.state.dates.length > 0 ? (
-            <DisplayWeatherInfo address={this.state.address} />
+            <WeatherInfo 
+            address={this.state.address}
+            weatherData={this.state.dates} 
+            />
           ) : (
             <Preloader />
           )}
