@@ -30,7 +30,10 @@ class PlaceInput extends React.Component {
     const addressComponents = place.address_components;
 
     if (addressComponents) {
-      for (const component in addressComponents) {
+      for (const component of addressComponents) {
+        if (!component.types) {
+          continue;
+        }
         if (component.types.includes("locality")) {
           address.city = component.long_name;
         }
@@ -54,8 +57,8 @@ class PlaceInput extends React.Component {
     if (places && places.length > 0) {
       const address = this.getAddress(places[0]);
 
-      this.setState({ inputValue: places[0].formatted_address });
       this.props.onPlaceSelected(address);
+      this.setState({ inputValue: "" });
     }
   };
 
