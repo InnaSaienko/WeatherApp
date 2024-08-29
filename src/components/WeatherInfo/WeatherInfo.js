@@ -8,11 +8,18 @@ class WeatherInfo extends React.Component {
   state = {
     includeExtendedDays: false,
     dates: null,
+    error: null,
     loading: true,
   };
 
   componentDidMount = () => this.getWeatherData(this.props.address);
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.address !== this.props.address) {
+      this.setState({ loading: true, error: null });
+      this.getWeatherData(this.props.address);
+    }
+  }
   getWeatherData = (address) => {
     const queryAddress = [address.city, address.countryCode]
       .filter((item) => item !== null)
@@ -21,9 +28,23 @@ class WeatherInfo extends React.Component {
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=92ac86e49bd033dac4bf08195ba344d1`
     )
-      .then((response) => response.json())
-      .then((data) => this.setWeatherData(data))
-      .then(() => this.setState({ loading: false }));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.cod !== "200") {
+          throw new Error(data.message);
+        }
+        this.setWeatherData(data);
+      })
+      .then(() => this.setState({ loading: false }))
+      .catch((error) => {
+        console.error("Fetching weather data failed:", error);
+        this.setState({ error: error.message, loading: false });
+      });
   };
 
   setWeatherData = (data) => {
@@ -39,7 +60,7 @@ class WeatherInfo extends React.Component {
     });
   };
   weatherBoxes = () => {
-    const boxLi = this.dates.slice(1, 5).map((day, index) => (
+    const boxLi = this.state.dates.slice(1, 5).map((day, index) => (
       <li key={index} className="list-item">
         <WeatherBox {...day} />
       </li>
@@ -57,18 +78,35 @@ class WeatherInfo extends React.Component {
   };
 
   render() {
-    const { includeExtendedDays, dates, loading } = this.state;
-    return loading ? (
-      <Preloader />
-    ) : (
+    const { includeExtendedDays, dates, error, loading } = this.state;
+    const { city, countryName} = this.props.address;
+    if (error) {
+      return <div className="error">Error: {error}</div>;
+    }
+
+    return (
       <>
-        <WeatherToday
-          cityName={this.props.address.city}
-          countryName={this.props.address.countryName}
-          todayWeather={dates[0]}
-        />
-        {includeExtendedDays && <this.weatherBoxes />}
-        <Button onClick={this.buttonClick} isEnabled={includeExtendedDays} />
+        <div className="city-title">
+          <h3 className="title-3">
+            {city} { countryName  ? `, ${countryName}` : ""}
+          </h3>
+        </div>
+        {loading ? (
+          <Preloader />
+        ) : (
+          <>
+            <WeatherToday
+              cityName={this.props.address.city}
+              countryName={this.props.address.countryName}
+              todayWeather={dates[0]}
+            />
+            {includeExtendedDays && <this.weatherBoxes />}
+            <Button
+              onClick={this.buttonClick}
+              isEnabled={includeExtendedDays}
+            />
+          </>
+        )}
       </>
     );
   }
