@@ -11,11 +11,6 @@ class PlaceInput extends React.Component {
     inputValue: "",
   };
 
-  constructor(props) {
-    super(props);
-    this.state.inputValue = props.city;
-  }
-
   getAddress = (place) => {
     let address = {
       city: null,
