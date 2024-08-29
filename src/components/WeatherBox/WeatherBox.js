@@ -1,5 +1,4 @@
 import React from "react";
-import "./WeatherBox.scss";
 
 const daysOfWeek = [
       "Sunday",
