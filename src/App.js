@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
 import PlaceInput from "./components/PlaceInput/PlaceInput";
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 
 class App extends React.Component {
@@ -28,7 +29,9 @@ class App extends React.Component {
         <h1 className="title">Weather Forecast</h1>
         <div className="weather-main">
           <PlaceInput onPlaceSelected={this.handlePlaceChange} />
-          <WeatherInfo address={this.state.address} />
+          <ErrorBoundary>
+            <WeatherInfo address={this.state.address} />
+          </ErrorBoundary>
         </div>
       </div>
     );
