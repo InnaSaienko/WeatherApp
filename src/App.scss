@@ -32,11 +32,16 @@
     border: 5px solid $color-blue-light;
     border-radius: 2vmax;
     color: $color-white;
+    @media screen and (max-width: 992px) {
+      font-size: 2.5vmin;
+      }
 
     & .menu-item {
       display: flex;
-      gap: 6vw;
+      justify-content: space-between;
       margin: 0;
+      padding-left: 0;
+      width: 80%;
 
       & .list-item {
         list-style: none;
