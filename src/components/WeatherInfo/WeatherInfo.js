@@ -14,16 +14,17 @@ class WeatherInfo extends React.Component {
     loading: true,
   };
 
-  componentDidMount = () => this.getWeatherData(this.props.address);
+  componentDidMount = () => this.getWeatherDataByAddress(this.props.placeLocation);
 
   componentDidUpdate(prevProps) {
-    if (prevProps.address !== this.props.address) {
+    if (prevProps.placeLocation !== this.props.placeLocation) {
       this.setState({ loading: true, error: null });
-      this.getWeatherData(this.props.address);
+      this.getWeatherDataByAddress(this.props.placeLocation);
     }
   }
-  getWeatherData = (address) => {
-    const queryAddress = [address.city, address.countryCode]
+  
+  getWeatherDataByAddress = (placeLocation) => {
+    const queryAddress = [placeLocation.address.city, placeLocation.address.countryCode]
       .filter((item) => item !== null)
       .join(",");
 
@@ -47,6 +48,34 @@ class WeatherInfo extends React.Component {
         console.error("Fetching weather data failed:", error);
         this.setState({ error: error.message, loading: false });
       });
+  };
+
+  getWeatherDataByGeoLocation = (geoLocation) => {
+    console.log();
+    // const lat = results[0].geometry.location.lat();
+    // const lng = results[0].geometry.location.lng();
+
+    // const queryParam = `lat=${lat}&lon=-${lng}`;
+    // fetch(
+    //   `https://api.openweathermap.org/data/2.5/forecast?q=${queryParam}&APPID=92ac86e49bd033dac4bf08195ba344d1`
+    // )
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.cod !== "200") {
+    //       throw new Error(data.message);
+    //     }
+    //     this.setWeatherData(data);
+    //   })
+    //   .then(() => this.setState({ loading: false }))
+    //   .catch((error) => {
+    //     console.error("Fetching weather data failed:", error);
+    //     this.setState({ error: error.message, loading: false });
+    //   });
   };
 
   setWeatherData = (data) => {
@@ -81,7 +110,7 @@ class WeatherInfo extends React.Component {
 
   render() {
     const { includeExtendedDays, dates, error, loading } = this.state;
-    const { city, countryName} = this.props.address;
+    const { city, countryName} = this.props.placeLocation.address;
     if (error) {
       return <div className="error">Error: {error}</div>;
     }
@@ -98,8 +127,8 @@ class WeatherInfo extends React.Component {
         ) : (
           <>
             <WeatherToday
-              cityName={this.props.address.city}
-              countryName={this.props.address.countryName}
+              cityName={this.props.placeLocation.address.city}
+              countryName={this.props.placeLocation.address.countryName}
               todayWeather={dates[0]}
             />
             {includeExtendedDays && <this.weatherBoxes />}
