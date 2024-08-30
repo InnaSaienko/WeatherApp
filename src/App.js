@@ -1,27 +1,27 @@
 import React from "react";
 import "./App.scss";
 import PlaceInput from "./components/PlaceInput/PlaceInput";
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import WeatherInfo from "./components/WeatherInfo/WeatherInfo";
 
 class App extends React.Component {
   state = {
-    address: {
-      city: "Reykjavik",
-      countryCode: "IS",
-      countryName: "Iceland",
-    }    
+    placeLocation: {
+      address: {
+        city: "Reykjavik",
+        countryCode: "IS",
+        countryName: "Iceland",
+      },
+      geoCoordinates: {
+        lat: null,
+        lng: null,
+      },
+    },
   };
 
-  handlePlaceChange = (address) => {
-    this.setState({
-      address: {
-        city: address.city,
-        countryCode: address.countryCode,
-        countryName: address.countryName,
-      }
-    });
-    };
+  handlePlaceChange = (placeLocation) => {
+    this.setState({ placeLocation });
+  };
 
   render() {
     return (
@@ -30,7 +30,7 @@ class App extends React.Component {
         <div className="weather-main">
           <PlaceInput onPlaceSelected={this.handlePlaceChange} />
           <ErrorBoundary>
-            <WeatherInfo address={this.state.address} />
+            <WeatherInfo placeLocation={this.state.placeLocation} />
           </ErrorBoundary>
         </div>
       </div>

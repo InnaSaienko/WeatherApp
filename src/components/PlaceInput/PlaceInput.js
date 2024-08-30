@@ -14,16 +14,34 @@ class PlaceInput extends React.Component {
   };
 
   getAddress = (place) => {
-    let address = {
-      city: null,
-      countryCode: null,
-      countryName: null,
+    
+    let placeLocation = {
+      address: {
+        city: null,
+        countryCode: null,
+        countryName: null,
+      },
+      geoCoordinates: {
+      lat: null,
+      lng: null
+      }
     };
-
+   
     if (!place) {
-      return address;
+      return placeLocation;
     }
+    
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
 
+    if(lat !== null && lng !== null) {
+      this.setState(
+        placeLocation.geoCoordinates = {
+          lat: lat,
+          lng: lng
+        }
+      )
+    }
     const addressComponents = place.address_components;
 
     if (addressComponents) {
@@ -32,29 +50,29 @@ class PlaceInput extends React.Component {
           continue;
         }
         if (component.types.includes("locality")) {
-          address.city = component.long_name;
+          placeLocation.address.city = component.long_name;
         }
         if (component.types.includes("country")) {
-          address.countryCode = component.short_name;
-          address.countryName = component.long_name;
+          placeLocation.address.countryCode = component.short_name;
+          placeLocation.address.countryName = component.long_name;
         }
-        if (address.city !== null && address.countryCode !== null) {
+        if (placeLocation.address.city !== null && placeLocation.address.countryCode !== null) {
           break;
         }
       }
     } else {
-      address.city = place.name;
+      placeLocation.address.city = place.name;
     }
-    return address;
+    return placeLocation;
   };
 
   handlePlaceChange = () => {
     const places = this.autocompleteInput.getPlaces();
-
+    
     if (places && places.length > 0) {
-      const address = this.getAddress(places[0]);
-
-      this.props.onPlaceSelected(address);
+      const placeLocation = this.getAddress(places[0]);
+      
+      this.props.onPlaceSelected(placeLocation);
       this.setState({ inputValue: "" });
     }
   };
