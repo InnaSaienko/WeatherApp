@@ -28,7 +28,7 @@ class WeatherInfo extends React.Component {
       .join(",");
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=API_KEY`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID={API_KEY}`
     )
       .then((response) => {
         if (!response.ok) {
