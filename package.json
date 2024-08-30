@@ -2,6 +2,7 @@
   "name": "OpenWeatherApi",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://InnaSaienko.github.io/WeatherApp",
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
     "@testing-library/jest-dom": "^5.17.0",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gn-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +44,8 @@
   },
   "resolutions": {
     "@babel/runtime": "7.0.0-beta.46"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
