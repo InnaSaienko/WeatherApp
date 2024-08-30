@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/WeatherApp/static/css/main.774e3c61.css",
+    "main.js": "/WeatherApp/static/js/main.1e2e3115.js",
+    "static/js/453.479b193e.chunk.js": "/WeatherApp/static/js/453.479b193e.chunk.js",
+    "static/media/11d.svg": "/WeatherApp/static/media/11d.ea898d056351cda593e5.svg",
+    "static/media/11n.svg": "/WeatherApp/static/media/11n.ea898d056351cda593e5.svg",
+    "static/media/13d.svg": "/WeatherApp/static/media/13d.d7752560af86cd6836ac.svg",
+    "static/media/13n.svg": "/WeatherApp/static/media/13n.8f4ae610b810d6518328.svg",
+    "static/media/10n.svg": "/WeatherApp/static/media/10n.ab3a6960ecfc5396d487.svg",
+    "static/media/10d.svg": "/WeatherApp/static/media/10d.c4584421505646ab0845.svg",
+    "static/media/09n.svg": "/WeatherApp/static/media/09n.8755a75302119a6a275a.svg",
+    "static/media/09d.svg": "/WeatherApp/static/media/09d.b5cbdf2b739b39f39247.svg",
+    "static/media/03n.svg": "/WeatherApp/static/media/03n.1777a6ab803165b29bd3.svg",
+    "static/media/03d.svg": "/WeatherApp/static/media/03d.044eb45083f0bb611d7b.svg",
+    "static/media/02n.svg": "/WeatherApp/static/media/02n.9587bb394c16e82b72b1.svg",
+    "static/media/02d.svg": "/WeatherApp/static/media/02d.dfd8b748296e0e9360af.svg",
+    "static/media/50n.svg": "/WeatherApp/static/media/50n.dfc45d82899daa21a135.svg",
+    "static/media/50d.svg": "/WeatherApp/static/media/50d.407bdd28927790802996.svg",
+    "static/media/04n.svg": "/WeatherApp/static/media/04n.ef525ff92bcfb9b75305.svg",
+    "static/media/04d.svg": "/WeatherApp/static/media/04d.0b7a824aaee92527398c.svg",
+    "static/media/01d.svg": "/WeatherApp/static/media/01d.9d5bbaf4e25a0bc22ac5.svg",
+    "static/media/01n.svg": "/WeatherApp/static/media/01n.ba9ac708c1f900080716.svg",
+    "index.html": "/WeatherApp/index.html",
+    "main.774e3c61.css.map": "/WeatherApp/static/css/main.774e3c61.css.map",
+    "main.1e2e3115.js.map": "/WeatherApp/static/js/main.1e2e3115.js.map",
+    "453.479b193e.chunk.js.map": "/WeatherApp/static/js/453.479b193e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.774e3c61.css",
+    "static/js/main.1e2e3115.js"
+  ]
+}
