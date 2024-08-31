@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Work+Sans:wght@500&display=swap");
+.loading {
+  background-color: #fff;
+  background-image: url("../../assets/images/loading.gif");
+  background-size: 25px 25px;
+  background-position: 97% center;
+  background-repeat: no-repeat;
+}
+
+.input {
+  display: inline-block;
+  margin-top: 3%;
+  padding: 10px 0px 10px 30px;
+  line-height: 120%;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+@media screen and (max-width: 992px) {
+  .input {
+    padding: 8px 0px 8px 20px;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .input {
+    padding: 5px 0px 5px 15px;
+    font-size: 16px;
+  }
+}
+
+.pac-container {
+  border: 1px solid #add8e6;
+  border-radius: 2vmin;
+}
+.pac-container::after {
+  display: none;
+}
+.pac-icon {
+  display: none;
+}
+.pac-item-query {
+  font: 400 16px Montserrat, sans-serif;
+  color: #529cb9;
+}
+.pac-item-query span {
+  color: #529cb9;
+}

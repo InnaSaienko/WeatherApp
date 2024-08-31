@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Work+Sans:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Work+Sans:wght@500&display=swap");
+.App-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.App {
+  background: #529cb9;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: #fff;
+}
+@media screen and (max-width: 992px) {
+  .App {
+    font-size: calc(8px + 2vmin);
+  }
+}
+.App .title {
+  margin: 0 auto;
+  font: 700 56px Work Sans, sans-serif;
+}
+@media screen and (max-width: 992px) {
+  .App .title {
+    font-size: 6vmin;
+  }
+}
+.App .weather-main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+  height: 80%;
+  background: #085375;
+  border: 5px solid #add8e6;
+  border-radius: 2vmax;
+  color: #fff;
+}
+@media screen and (max-width: 992px) {
+  .App .weather-main {
+    font-size: 2.5vmin;
+  }
+}
+.App .weather-main .menu-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0;
+  padding-left: 0;
+  width: 80%;
+}
+.App .weather-main .menu-item .list-item {
+  list-style: none;
+}
+.App .weather-main .btn-round {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+.App .weather-main .btn-round::before, .App .weather-main .btn-round::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 10px;
+  background-color: #fff;
+  top: 42%;
+  left: 59%;
+  -webkit-transform: translateX(-50%) rotate(45deg);
+      -ms-transform: translateX(-50%) rotate(45deg);
+          transform: translateX(-50%) rotate(45deg);
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+.App .weather-main .btn-round::after {
+  left: 42%;
+  -webkit-transform: translateX(-50%) rotate(-45deg);
+      -ms-transform: translateX(-50%) rotate(-45deg);
+          transform: translateX(-50%) rotate(-45deg);
+}
+.App .weather-main .btn-round.active::before {
+  -webkit-transform: translateX(-50%) rotate(-45deg);
+      -ms-transform: translateX(-50%) rotate(-45deg);
+          transform: translateX(-50%) rotate(-45deg);
+}
+.App .weather-main .btn-round.active::after {
+  -webkit-transform: translateX(-50%) rotate(45deg);
+      -ms-transform: translateX(-50%) rotate(45deg);
+          transform: translateX(-50%) rotate(45deg);
+}
