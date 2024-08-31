@@ -9,9 +9,7 @@ class WeatherToday extends React.Component {
     const speed = this.props.todayWeather.wind.speed;
     const precip = this.props.todayWeather.pop;
     const pressure = this.props.todayWeather.main.pressure;
-    // const countryName = this.props.countryName;
-    // const city = this.props.cityName;
-
+    
     return (
       <div className="weather-today">
         <div className="weather-icon">
