@@ -13,8 +13,8 @@ class App extends React.Component {
         countryName: "Iceland",
       },
       geoCoordinates: {
-        lat: null,
-        lng: null,
+        lat: 64.128288,
+        lng: -21.827774,
       },
     },
   };
