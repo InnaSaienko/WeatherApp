@@ -11,74 +11,50 @@ class WeatherInfo extends React.Component {
     includeExtendedDays: false,
     dates: null,
     error: null,
-    loading: true,
+    loading: true
   };
 
-  // componentDidMount = () => this.getWeatherDataByAddress(this.props.placeLocation);
-  componentDidMount = () => this.getWeatherDataByGeoLocation(this.props.placeLocation);
+  componentDidMount = () =>
+    this.getWeatherData(this.props.placeLocation.geoCoordinates);
 
   componentDidUpdate(prevProps) {
-    if (prevProps.placeLocation !== this.props.placeLocation) {
-      this.setState({ loading: true, error: null });
-      // this.getWeatherDataByAddress(this.props.placeLocation);
-      this.getWeatherDataByGeoLocation(this.props.placeLocation);
+    const prevLocation = prevProps.placeLocation.geoCoordinates;
+    const newLocation = this.props.placeLocation.geoCoordinates;
+
+    if (
+      prevLocation && newLocation && (prevLocation.lat !== newLocation.lat ||
+      prevLocation.lng !== newLocation.lng)
+    ) {
+      this.getWeatherData(this.props.placeLocation.geoCoordinates);
     }
   }
-  
-  // getWeatherDataByAddress = (placeLocation) => {
-  //   const queryAddress = [placeLocation.address.city, placeLocation.address.countryCode]
-  //     .filter((item) => item !== null)
-  //     .join(",");
 
-  //   fetch(
-  //     `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=${API_KEY}`
-  //   )
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.cod !== "200") {
-  //         throw new Error(data.message);
-  //       }
-  //       this.setWeatherData(data);
-  //     })
-  //     .then(() => this.setState({ loading: false }))
-  //     .catch((error) => {
-  //       console.error("Fetching weather data failed:", error);
-  //       this.setState({ error: error.message, loading: false });
-  //     });
-  // };
+  getWeatherData = (geoCoordinates) => {
+    const lat = geoCoordinates.lat;
+    const lon = geoCoordinates.lng;
 
+    this.setState({ loading: true, error: null });
 
-  getWeatherDataByGeoLocation = (geoLocation) => {
-    console.log();
-    // const lat = results[0].geometry.location.lat();
-    // const lng = results[0].geometry.location.lng();
-
-    // const queryParam = `lat=${lat}&lon=-${lng}`;
-    // fetch(
-    //   `https://api.openweathermap.org/data/2.5/forecast?q=${queryParam}&APPID=92ac86e49bd033dac4bf08195ba344d1`
-    // )
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.cod !== "200") {
-    //       throw new Error(data.message);
-    //     }
-    //     this.setWeatherData(data);
-    //   })
-    //   .then(() => this.setState({ loading: false }))
-    //   .catch((error) => {
-    //     console.error("Fetching weather data failed:", error);
-    //     this.setState({ error: error.message, loading: false });
-    //   });
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.cod !== "200") {
+          throw new Error(data.message);
+        }
+        this.setWeatherData(data);
+      })
+      .then(() => this.setState({ loading: false }))
+      .catch((error) => {
+        console.error("Fetching weather data failed:", error);
+        this.setState({ error: error.message, loading: false });
+      });
   };
 
   setWeatherData = (data) => {
@@ -93,6 +69,7 @@ class WeatherInfo extends React.Component {
       dates: daysWeather,
     });
   };
+
   weatherBoxes = () => {
     const boxLi = this.state.dates.slice(1, 5).map((day, index) => (
       <li key={index} className="list-item">
@@ -113,7 +90,7 @@ class WeatherInfo extends React.Component {
 
   render() {
     const { includeExtendedDays, dates, error, loading } = this.state;
-    const { city, countryName} = this.props.placeLocation.address;
+    const { city, countryName } = this.props.placeLocation.address;
     if (error) {
       return <div className="error">Error: {error}</div>;
     }
@@ -122,18 +99,14 @@ class WeatherInfo extends React.Component {
       <>
         <div className="city-title">
           <h3 className="title-3">
-            {city} { countryName  ? `, ${countryName}` : ""}
+            {city} {countryName ? `, ${countryName}` : ""}
           </h3>
         </div>
         {loading ? (
           <Preloader />
         ) : (
           <>
-            <WeatherToday
-              cityName={this.props.placeLocation.address.city}
-              countryName={this.props.placeLocation.address.countryName}
-              todayWeather={dates[0]}
-            />
+            <WeatherToday todayWeather={dates[0]} />
             {includeExtendedDays && <this.weatherBoxes />}
             <Button
               onClick={this.buttonClick}

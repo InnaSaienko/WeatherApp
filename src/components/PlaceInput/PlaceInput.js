@@ -56,7 +56,8 @@ class PlaceInput extends React.Component {
           placeLocation.address.countryCode = component.short_name;
           placeLocation.address.countryName = component.long_name;
         }
-        if (placeLocation.address.city !== null && placeLocation.address.countryCode !== null) {
+        if (placeLocation.address.city !== null 
+          && placeLocation.address.countryCode !== null) {
           break;
         }
       }
