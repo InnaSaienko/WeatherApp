@@ -4,7 +4,7 @@ import WeatherToday from "../WeatherToday/WeatherToday";
 import Button from "../Button/Button";
 import WeatherBox from "../WeatherBox/WeatherBox";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const WEATHER_API_KEY = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 class WeatherInfo extends React.Component {
   state = {
@@ -28,7 +28,7 @@ class WeatherInfo extends React.Component {
       .join(",");
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=${API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${queryAddress}&APPID=${WEATHER_API_KEY}`
     )
       .then((response) => {
         if (!response.ok) {

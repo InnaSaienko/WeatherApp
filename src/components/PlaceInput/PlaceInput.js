@@ -2,6 +2,8 @@ import React from "react";
 import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 import "./PlaceInput.scss";
 
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
 class PlaceInput extends React.Component {
   static loadScriptLibraries = ["places"];
   static searchBoxOptions = { types: ["(cities)"] };
@@ -60,7 +62,7 @@ class PlaceInput extends React.Component {
   render() {
     return (
       <LoadScript
-        googleMapsApiKey="AIzaSyCT25gIBoiANcNPkvHhxBXEzijzMseVaFc"
+        googleMapsApiKey={GOOGLE_MAPS_API_KEY}
         libraries={PlaceInput.loadScriptLibraries}
         loadingElement={<></>}
       >
