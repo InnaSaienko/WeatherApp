@@ -87,47 +87,44 @@ class PlaceInput extends React.Component {
 
     return placeLocation;
   };
-
-  handlePlacesChanged = (places) => {
-    let placeLocation = null;
-
-    if (places && places.length > 0) {
-      const firstPlace = places[0];
-      placeLocation = this.extractPlaceLocation(firstPlace);
-    }
-
-    if(placeLocation) {
-      this.props.onPlaceSelected(placeLocation);
-    }
-    this.setState({ inputValue: "" });
+  
+  handlePlacesChanged = () => {
+    const places = this.searchBox.getPlaces();
+    const place = places && places.length > 0 ? places[0] : null;
+    this.handlePlaceAvailable(place);
   };
 
-  handleDefaultPlacesAvailable = (places) => {
+  handlePlaceAvailable = (place) => {
     let placeLocation = null;
 
-    if (places && places.length > 0) {
-      const firstPlace = places[0];
-      placeLocation = this.extractPlaceLocation(firstPlace);
+    if (place) {
+      placeLocation = this.extractPlaceLocation(place);
     }
 
-    if(placeLocation) {
+    if (placeLocation) {
       this.props.onPlaceSelected(placeLocation);
     }
     this.setState({ inputValue: "", geoLocation: null });
-  }
+  };
 
   render() {
-   const GetDefaultPlacesByLatLon = (props) => {
+    const GetDefaultPlacesByLatLon = (props) => {
       // gets location object from browser coordinates
       if (!props.geoCoordinates) return null;
 
       const g = new window.google.maps.Geocoder();
       g.geocode({ location: props.geoCoordinates })
         .then((response) => {
-          props.onDefaultPlacesAvailable(response.results);
+          const index = response.results.findIndex(
+            (result) =>
+              result.types.includes("political") ||
+              result.types.includes("administrative_area_level_2")
+          );
+          props.onDefaultPlacesAvailable(
+            index !== -1 ? response.results[index] : null
+          );
         })
         .catch((e) => console.warn("Geocoder failed due to: " + e));
-      return <></>;
     };
 
     return (
@@ -136,13 +133,14 @@ class PlaceInput extends React.Component {
         libraries={PlaceInput.loadScriptLibraries}
         loadingElement={<></>}
       >
-        < GetDefaultPlacesByLatLon 
-        geoCoordinates={this.state.geoLocation} 
-        onDefaultPlacesAvailable={this.handleDefaultPlacesAvailable}/>
+        <GetDefaultPlacesByLatLon
+          geoCoordinates={this.state.geoLocation}
+          onDefaultPlacesAvailable={this.handlePlaceAvailable}
+        />
         <StandaloneSearchBox
           onLoad={(searchBox) => (this.searchBox = searchBox)}
           options={PlaceInput.searchBoxOptions}
-          onPlacesChanged={() => this.handlePlacesChanged(this.searchBox.getPlaces())}
+          onPlacesChanged={this.handlePlacesChanged}
         >
           <input
             id="city-input"
