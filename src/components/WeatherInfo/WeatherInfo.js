@@ -31,12 +31,12 @@ class WeatherInfo extends React.Component {
 
   getWeatherData = (geoCoordinates) => {
     const lat = geoCoordinates.lat;
-    const lon = geoCoordinates.lng;
+    const lng = geoCoordinates.lng;
 
     this.setState({ loading: true, error: null });
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_KEY}`
     )
       .then((response) => {
         if (!response.ok) {

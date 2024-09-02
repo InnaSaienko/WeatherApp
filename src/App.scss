@@ -25,13 +25,14 @@
   }
 
   & .weather-main {
-    @include flex(flex-start, center, column);
+    @include flex(space-between, center, column);
     width: 80%;
     height: 80%;
     background: $color-blue;
     border: 5px solid $color-blue-light;
     border-radius: 2vmax;
     color: $color-white;
+    padding: 2vmin;
     @media screen and (max-width: 992px) {
       font-size: 2.5vmin;
       }
