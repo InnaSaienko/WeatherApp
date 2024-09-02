@@ -1,5 +1,6 @@
 import React from "react";
 import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
+import { GetDefaultPlacesByLatLon} from "../GetDefaultPlaceByLatLon/GetDefaultPlacesByLatLon"
 import "./PlaceInput.scss";
 
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -87,7 +88,7 @@ class PlaceInput extends React.Component {
 
     return placeLocation;
   };
-  
+
   handlePlacesChanged = () => {
     const places = this.searchBox.getPlaces();
     const place = places && places.length > 0 ? places[0] : null;
@@ -108,25 +109,6 @@ class PlaceInput extends React.Component {
   };
 
   render() {
-    const GetDefaultPlacesByLatLon = (props) => {
-      // gets location object from browser coordinates
-      if (!props.geoCoordinates) return null;
-
-      const g = new window.google.maps.Geocoder();
-      g.geocode({ location: props.geoCoordinates })
-        .then((response) => {
-          const index = response.results.findIndex(
-            (result) =>
-              result.types.includes("political") ||
-              result.types.includes("administrative_area_level_2")
-          );
-          props.onDefaultPlacesAvailable(
-            index !== -1 ? response.results[index] : null
-          );
-        })
-        .catch((e) => console.warn("Geocoder failed due to: " + e));
-    };
-
     return (
       <LoadScript
         googleMapsApiKey={GOOGLE_MAPS_API_KEY}
