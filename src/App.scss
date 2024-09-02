@@ -46,6 +46,9 @@
 
       & .list-item {
         list-style: none;
+        & .title-3 {
+          margin: 0;
+        }
       }
     }
 
