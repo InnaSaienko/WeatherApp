@@ -5,42 +5,52 @@ import "./PlaceInput.scss";
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 class PlaceInput extends React.Component {
+  state = {
+    inputValue: "",
+    geoLocation: null,
+  };
+
   static loadScriptLibraries = ["places"];
   static searchBoxOptions = { types: ["(cities)"] };
 
-  autocompleteInput = null;
-  state = {
-    inputValue: "",
+  searchBox = null;
+
+  componentDidMount = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const geoLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.setState({ geoLocation });
+      });
+    } else {
+      console.warn("Geolocation is not supported by this browser.");
+    }
+  };
+
+  getLatLon = (place) => {
+    let geoLocation = {
+      lat: null,
+      lng: null,
+    };
+
+    if ("geometry" in place && "location" in place.geometry) {
+      geoLocation.lat = place.geometry.location.lat();
+      geoLocation.lng = place.geometry.location.lng();
+    }
+    return geoLocation;
   };
 
   getAddress = (place) => {
-    
-    let placeLocation = {
-      address: {
-        city: null,
-        countryCode: null,
-        countryName: null,
-      },
-      geoCoordinates: {
-      lat: null,
-      lng: null
-      }
+    let address = {
+      city: null,
+      countryCode: null,
+      countryName: null,
     };
-   
-    if (!place) {
-      return placeLocation;
-    }
-    
-    const lat = place.geometry.location.lat();
-    const lng = place.geometry.location.lng();
 
-    if(lat !== null && lng !== null) {
-      this.setState(
-        placeLocation.geoCoordinates = {
-          lat: lat,
-          lng: lng
-        }
-      )
+    if (!place) {
+      return address;
     }
     const addressComponents = place.address_components;
 
@@ -50,45 +60,89 @@ class PlaceInput extends React.Component {
           continue;
         }
         if (component.types.includes("locality")) {
-          placeLocation.address.city = component.long_name;
+          address.city = component.long_name;
         }
         if (component.types.includes("country")) {
-          placeLocation.address.countryCode = component.short_name;
-          placeLocation.address.countryName = component.long_name;
+          address.countryCode = component.short_name;
+          address.countryName = component.long_name;
         }
-        if (placeLocation.address.city !== null 
-          && placeLocation.address.countryCode !== null) {
+        if (address.city !== null && address.countryCode !== null) {
           break;
         }
       }
     } else {
-      placeLocation.address.city = place.name;
+      address.city = place.name;
     }
+    return address;
+  };
+
+  extractPlaceLocation = (place) => {
+    if (!place) {
+      return null;
+    }
+
+    const address = this.getAddress(place);
+    const geoCoordinates = this.getLatLon(place);
+    const placeLocation = { address, geoCoordinates };
+
     return placeLocation;
   };
 
-  handlePlaceChange = () => {
-    const places = this.autocompleteInput.getPlaces();
-    
+  handlePlacesChanged = (places) => {
+    let placeLocation = null;
+
     if (places && places.length > 0) {
-      const placeLocation = this.getAddress(places[0]);
-      
-      this.props.onPlaceSelected(placeLocation);
-      this.setState({ inputValue: "" });
+      const firstPlace = places[0];
+      placeLocation = this.extractPlaceLocation(firstPlace);
     }
+
+    if(placeLocation) {
+      this.props.onPlaceSelected(placeLocation);
+    }
+    this.setState({ inputValue: "" });
   };
 
+  handleDefaultPlacesAvailable = (places) => {
+    let placeLocation = null;
+
+    if (places && places.length > 0) {
+      const firstPlace = places[0];
+      placeLocation = this.extractPlaceLocation(firstPlace);
+    }
+
+    if(placeLocation) {
+      this.props.onPlaceSelected(placeLocation);
+    }
+    this.setState({ inputValue: "", geoLocation: null });
+  }
+
   render() {
+   const GetDefaultPlacesByLatLon = (props) => {
+      // gets location object from browser coordinates
+      if (!props.geoCoordinates) return null;
+
+      const g = new window.google.maps.Geocoder();
+      g.geocode({ location: props.geoCoordinates })
+        .then((response) => {
+          props.onDefaultPlacesAvailable(response.results);
+        })
+        .catch((e) => console.warn("Geocoder failed due to: " + e));
+      return <></>;
+    };
+
     return (
       <LoadScript
         googleMapsApiKey={GOOGLE_MAPS_API_KEY}
         libraries={PlaceInput.loadScriptLibraries}
         loadingElement={<></>}
       >
+        < GetDefaultPlacesByLatLon 
+        geoCoordinates={this.state.geoLocation} 
+        onDefaultPlacesAvailable={this.handleDefaultPlacesAvailable}/>
         <StandaloneSearchBox
-          onLoad={(ref) => (this.autocompleteInput = ref)}
+          onLoad={(searchBox) => (this.searchBox = searchBox)}
           options={PlaceInput.searchBoxOptions}
-          onPlacesChanged={this.handlePlaceChange}
+          onPlacesChanged={() => this.handlePlacesChanged(this.searchBox.getPlaces())}
         >
           <input
             id="city-input"
