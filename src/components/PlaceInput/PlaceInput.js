@@ -17,21 +17,7 @@ class PlaceInput extends React.Component {
 
   searchBox = null;
 
-  componentDidMount = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const geoLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        this.setState({ geoLocation });
-      });
-    } else {
-      console.warn("Geolocation is not supported by this browser.");
-    }
-  };
-
-    extractPlaceLocation = (place) => {
+  extractPlaceLocation = (place) => {
     if (!place) {
       return null;
     }
@@ -70,7 +56,6 @@ class PlaceInput extends React.Component {
         loadingElement={<></>}
       >
         <GetDefaultPlacesByLatLon
-          geoCoordinates={this.state.geoLocation}
           onDefaultPlacesAvailable={this.handlePlaceAvailable}
         />
         <StandaloneSearchBox
@@ -85,7 +70,6 @@ class PlaceInput extends React.Component {
             placeholder="Enter a City..."
             value={this.state.inputValue}
             onChange={(e) => this.setState({ inputValue: e.target.value })}
-            onKeyDown={(e) => console.log(this.state)}
           />
         </StandaloneSearchBox>
       </LoadScript>
