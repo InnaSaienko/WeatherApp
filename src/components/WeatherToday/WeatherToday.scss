@@ -4,6 +4,20 @@
 .weather-today {
   @include flex(space-between, center);
   width: 80%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   & .weather-icon {
     flex: calc((100% - 2rem) / 3);
@@ -19,7 +33,7 @@
 
     & .text {
       margin: 1%;
-      
+
       & span {
         font-weight: bold;
         @media screen and (max-width: 992px) {
@@ -27,5 +41,16 @@
         }
       }
     }
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
