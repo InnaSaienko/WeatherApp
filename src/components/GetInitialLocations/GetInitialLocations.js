@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 // gets location object from browser coordinates
 
-function GetDefaultPlacesByLatLon(props) {
+function GetInitialLocations(props) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -11,16 +11,7 @@ function GetDefaultPlacesByLatLon(props) {
         };
         const g = new window.google.maps.Geocoder();
         g.geocode({ location: geoLocation })
-          .then((response) => {
-            const index = response.results.findIndex(
-              (result) =>
-                result.types.includes("political") ||
-                result.types.includes("administrative_area_level_2")
-            );
-            props.onInitialPlaceAvailable(
-              index !== -1 ? response.results[index] : null
-            );
-          })
+          .then((response) => props.onInitialPlacesAvailable(response.results))
           .catch((e) => {
             console.warn("Geocoder failed due to: " + e);
           });
@@ -31,4 +22,4 @@ function GetDefaultPlacesByLatLon(props) {
   }, []);
   return null;
 }
-export { GetDefaultPlacesByLatLon };
+export { GetInitialLocations };
