@@ -17,7 +17,7 @@ function GetDefaultPlacesByLatLon(props) {
                 result.types.includes("political") ||
                 result.types.includes("administrative_area_level_2")
             );
-            props.onDefaultPlacesAvailable(
+            props.onInitialPlaceAvailable(
               index !== -1 ? response.results[index] : null
             );
           })
