@@ -1,6 +1,6 @@
 import React from "react";
 import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
-import { GetInitialLocation } from "../GetInitialLocation/GetInitialLocation";
+import { GetInitialLocations } from "../GetInitialLocations/GetInitialLocations";
 import { getLatLon, getAddress } from "../../utils/geocoder";
 import "./PlaceInput.scss";
 
@@ -29,6 +29,15 @@ class PlaceInput extends React.Component {
     return placeLocation;
   };
 
+  handleInitialPlacesAvailable = (places) => {
+    const index = places.findIndex(
+      (place) =>
+        place.types.includes("political") ||
+        place.types.includes("administrative_area_level_2")
+    );
+    this.handlePlaceAvailable(index !== -1 ? places[index] : null);
+  };
+
   handlePlacesChanged = () => {
     const places = this.searchBox.getPlaces();
     const place = places && places.length > 0 ? places[0] : null;
@@ -55,7 +64,9 @@ class PlaceInput extends React.Component {
         libraries={PlaceInput.loadScriptLibraries}
         loadingElement={<></>}
       >
-        <GetInitialLocation onInitialPlaceAvailable={this.handlePlaceAvailable} />
+        <GetInitialLocations
+          onInitialPlacesAvailable={this.handleInitialPlacesAvailable}
+        />
         <StandaloneSearchBox
           onLoad={(searchBox) => (this.searchBox = searchBox)}
           options={PlaceInput.searchBoxOptions}
