@@ -3,7 +3,7 @@
 .input {
   display: inline-block;
   margin-top: 3%;
-  padding: 10px 0px 10px 30px;
+  padding: 10px 40px 10px 20px;
   line-height: 120%;
   border-radius: 20px;
   border: none;
@@ -24,7 +24,7 @@
 }
 ::placeholder {
   color: $color-blue;
-  opacity: 1; /* Firefox */
+  opacity: 1;
 }
 .pac {
   &-container {
@@ -37,7 +37,6 @@
     & .pac-item {
       color: $color-main;
     }
-    
   }
   &-icon {
     display: none;

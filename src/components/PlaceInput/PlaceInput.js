@@ -41,6 +41,7 @@ class PlaceInput extends React.Component {
   handlePlacesChanged = () => {
     const places = this.searchBox.getPlaces();
     const place = places && places.length > 0 ? places[0] : null;
+    
     this.handlePlaceAvailable(place);
   };
 
