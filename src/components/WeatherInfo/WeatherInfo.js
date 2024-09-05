@@ -99,7 +99,7 @@ class WeatherInfo extends React.Component {
       <>
         <div className="city-title">
           <h3 className="title-3">
-            {city} {countryName ? `, ${countryName}` : ""}
+          {city && countryName ? `${city}, ${countryName}` : city ? city : countryName}
           </h3>
         </div>
         {loading ? (
