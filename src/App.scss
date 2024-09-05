@@ -47,8 +47,21 @@
 
       & .list-item {
         list-style: none;
+        max-width: 25%;
         & .title-3 {
           margin: 0;
+          text-align: center;
+        }
+        & img {
+          width: 64px; 
+          height: auto;
+    
+          @media screen and (max-width: 768px) {
+            width: 6vmin;
+          }
+        }
+
+        & p{
           text-align: center;
         }
       }
