@@ -19,7 +19,7 @@ function GetInitialLocations(props) {
     } else {
       console.warn("Geolocation is not supported by this browser.");      
     }
-  }, [props]);
+  }, []);
   return null;
 }
 export { GetInitialLocations };
